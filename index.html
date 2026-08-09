@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D First-Person Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            overflow: hidden;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        #game-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            z-index: 100;
+        }
+        #crosshair::before,
+        #crosshair::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        #crosshair::before {
+            width: 2px;
+            height: 20px;
+            left: 9px;
+            top: 0;
+        }
+        #crosshair::after {
+            width: 20px;
+            height: 2px;
+            top: 9px;
+            left: 0;
+        }
+        #ui-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            z-index: 100;
+            pointer-events: none;
+        }
+        .stat-item {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        #start-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            color: white;
+        }
+        #start-screen h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        #start-screen p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        #start-button {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 24px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #start-button:hover {
+            background: #45a049;
+        }
+        #inventory {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+            z-index: 100;
+            display: none;
+        }
+        .inventory-slot {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 2px solid #666;
+            margin: 5px;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.1);
+        }
+        .inventory-slot.active {
+            border-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="crosshair"></div>
+        <div id="ui-overlay">
+            <div class="stat-item">Health: <span id="health-display">100</span></div>
+            <div class="stat-item">Score: <span id="score-display">0</span></div>
+            <div class="stat-item">Level: <span id="level-display">1</span></div>
+        </div>
+        <div id="inventory">
+            <h3>Inventory</h3>
+            <div id="inventory-slots"></div>
+        </div>
+        <div id="start-screen">
+            <h1>3D Adventure Game</h1>
+            <p>WASD - Move</p>
+            <p>Mouse - Look</p>
+            <p>Space - Jump</p>
+            <p>E - Interact</p>
+            <p>1-5 - Select Item</p>
+            <button id="start-button">Click to Start</button>
+        </div>
+    </div>
 
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
