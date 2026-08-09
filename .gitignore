@@ -1,1 +1,19 @@
-Nothing needs to be added to .gitignore since only an HTML file was added, which is a source file that should be tracked in version control.
+```gitignore
+# Dependencies
+node_modules/
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+*.env.*
+```
